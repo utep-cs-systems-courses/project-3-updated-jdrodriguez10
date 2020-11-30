@@ -117,6 +117,8 @@ char state4(){
 }
 
 
+// Translated into assembly
+/*
 // changes states
 void state_advance()
 {
@@ -134,8 +136,8 @@ void state_advance()
   case 4:
     changed = state4(); // turns leds and buzzer off.
     break;
-  default: red_on = 1;
   }
   led_changed = changed;
   led_update();
 }
+*/

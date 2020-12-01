@@ -32,12 +32,23 @@ char turn_red_on()
 }
 
 
+// Translated to assembly
+/*
 // increases/decreases pitch
 void buzzer_advance(){
   if (state2_status) freq += 225;
   else freq -= 450;
   short cycles = 2000000/freq;
   buzzer_set_period(cycles);
+}
+*/
+
+
+void buzzer_advance();
+
+
+short get_period(short freq){
+  return 2000000/freq;
 }
 
 

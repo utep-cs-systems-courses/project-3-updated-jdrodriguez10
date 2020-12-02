@@ -7,29 +7,10 @@
 #include "buzzer.h"
 #include "switches.h"
 
-static short freq = 500;
-static short state2_status = 1;
+extern short freq = 500;
+extern short state2_status = 1;
 
 char super_state = 0;
-
-// turns on/off red led
-char turn_red_on()
-{
-  static char stateS1 = 1;
-  switch (stateS1) {
-  case 0:
-    red_on = 1;
-    buzzer_set_period(1000);
-    stateS1 = 1;
-    break;
-  case 1:
-    red_on = 0;
-    buzzer_set_period(0);
-    stateS1 = 0;
-    break;
-  }
-  return 1;
-}
 
 
 // Translated to assembly
@@ -42,6 +23,34 @@ void buzzer_advance(){
   buzzer_set_period(cycles);
 }
 */
+
+
+void lcd_state(int COLOR){
+  u_char centerWidth = screenWidth/2 + 1;
+  u_char centerHeight = screenHeight/2 + 1;
+
+  draw_diamond(centerWidth-20, centerHeight, 10, COLOR);
+  draw_diamond(centerWidth+20, centerHeight, 10, COLOR);
+  draw_diamond(centerWidth, centerHeight, 10, COLOR_WHITE);
+
+  drawString11x16((centerWidth/2)+10, centerHeight+10, "John", COLOR, COLOR_BLACK);
+}
+
+
+void lcd_clear()
+{
+  u_char centerWidth = screenWidth/2 + 1;
+  u_char centerHeight = screenHeight/2 + 1;
+
+  draw_diamond(centerWidth-20, centerHeight, 10, COLOR_BLACK);
+  draw_diamond(centerWidth+20, centerHeight, 10, COLOR_BLACK);
+  draw_diamond(centerWidth, centerHeight, 10, COLOR_BLACK);
+
+  drawString11x16((centerWidth/2)+10, centerHeight+10, "John", COLOR_BLACK, COLOR_BLACK);
+}
+
+
+void draw_diamond(u_char col, u_char row, u_char size, u_int color);
 
 
 void buzzer_advance();
@@ -79,13 +88,23 @@ void dim_leds(char x){
 }
 
 
-// turns on/off leds
+// turns on/off red led
 char state1()
 {
-  char changed = 0;
-  changed = turn_red_on;
-  led_changed = changed;
-  led_update();
+  static char stateS1 = 1;
+  switch (stateS1) {
+  case 0:
+    red_on = 1;
+    buzzer_set_period(1000);
+    stateS1 = 1;
+    break;
+  case 1:
+    red_on = 0;
+    buzzer_set_period(0);
+    stateS1 = 0;
+    break;
+  }
+  return 1;
 }
 
 
@@ -124,7 +143,6 @@ char state3()
 char state4(){
   buzzer_set_period(0);
   red_on = 0;
-  green_on = 0;
   led_changed = 1;
   led_update();
   return 1;

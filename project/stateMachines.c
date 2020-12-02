@@ -24,7 +24,7 @@ void buzzer_advance(){
 }
 */
 
-
+//draws line of 3 diamonds with John under it
 void lcd_state(int COLOR){
   u_char centerWidth = screenWidth/2 + 1;
   u_char centerHeight = screenHeight/2 + 1;
@@ -37,6 +37,7 @@ void lcd_state(int COLOR){
 }
 
 
+//same as lcd_state but makes diamonds and name black
 void lcd_clear()
 {
   u_char centerWidth = screenWidth/2 + 1;

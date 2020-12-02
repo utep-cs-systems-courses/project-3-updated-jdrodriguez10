@@ -25,6 +25,7 @@ void draw_diamond(u_char col, u_char row, u_char size, u_int color){
   }
 }
 
+//p2 interrupt handler and counter that sets redrawScreen=1 every sec
 void wdt_c_handler()
 {
   static int s1Count = 0;

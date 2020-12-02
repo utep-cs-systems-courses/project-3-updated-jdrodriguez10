@@ -9,6 +9,8 @@
 
 short redrawScreen = 1;
 
+int isNotNegative(int value);
+
 void wdt_c_handler()
 {
   static int secCount = 0;
